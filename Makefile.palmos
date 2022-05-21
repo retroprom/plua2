@@ -1,8 +1,10 @@
 LUA=.
+DIRS=lib/palmos src/palmos src/lib/palmos bin/palmos
 
 include $(LUA)/config.palmos
 
-all clean:
+all:
+	mkdir -pv $(DIRS)
 	cd src; $(MAKE) -f Makefile.palmos $@
 	cd src/lib; $(MAKE) -f Makefile.palmos $@
 	cd src/plua/client; $(MAKE) $@
@@ -11,3 +13,17 @@ all clean:
 	cd src/plua/help; $(MAKE) $@
 	cd src/plua/lib; $(MAKE) -f Makefile.lib $@
 	cd src/plua/lib; $(MAKE) $@
+
+clean:
+	rm -rf $(DIRS) \
+		src/plua/client/client src/plua/client/res \
+		src/plua/help/plua2help.txt src/plua/res src/plua/rt/res \
+		src/plua/help/defs.dat src/plua/help/defs.txt \
+		src/plua/help/plua2help.rcp src/plua/help/words.dat \
+		src/plua/help/words.txt src/plua/client/client.prc
+
+	find . \( \
+		-name '*.o' -o \
+		-name '*.tmp' -o \
+		-name '*.grc' -o \
+			-name '*.bin' \) -exec rm {} \;

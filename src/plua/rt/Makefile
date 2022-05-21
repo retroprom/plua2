@@ -1,10 +1,9 @@
 LUA       = ../../..
 include $(LUA)/config.palmos
 
-MULTILINK = $(HOME)/work/palm/Palm/multilink-linux
+MULTILINK = $(MULTILINK_LIBDIR)
 
-PO        = /opt/palmdev/sdk-5/include/PalmOne
-INC       = -I$(LUA)/include -I$(LUA)/include/plua -I.. -I../.. -I$(PO)
+INC       = -I$(LUA)/include -I$(LUA)/include/plua -I.. -I../.. $(PALM_INCS)
 
 DEFS      = -DMULTILINK -DPALMOS -DLUA5
 
@@ -34,7 +33,7 @@ resource.tmp: Makefile resource.rcp
 	sed -e "s/@@VERSION@@/$(VERSION)/g" < resource.rcp > resource.tmp
 
 $(BIN)/$(PROG).prc: $(OBJS) $(LOBJS) $(LIBS) res
-	$(MULTILINK)/m68k-palmos-multilink -basename RLUA -segmentsize 29k -nostdlib -libdir $(MULTILINK) -fid LuaR $(OBJS) $(LOBJS) $(LIBS) ../libnfm.a ../libnfm2.a /opt/palmdev/sdk-5/lib/m68k-palmos-coff/libPalmOSGlue.a
+	m68k-palmos-multilink -basename RLUA -segmentsize 29k -nostdlib -libdir $(MULTILINK) -fid LuaR $(OBJS) $(LOBJS) $(LIBS) ../libnfm.a ../libnfm2.a /opt/palmdev/sdk-5/lib/m68k-palmos-coff/libPalmOSGlue.a
 	rm -f pref0000.RLUA.grc
 	cp ../pref0000.dat pref0000.RLUA.grc
 	$(BUILDPRC) $(BIN)/$(PROG).prc Plua2RT LuaR *.RLUA.grc *.bin

@@ -13,7 +13,7 @@ $(BIN)/$(HELP).prc: $(HELP).rcp
 	$(BUILDPRC) --no-check-resources -o $(BIN)/$(HELP).prc -t Help -c LuaP -n Plua2Help *.bin
 
 $(HELP).rcp: $(HELP).txt
-	./gerahelp.ksh $(HELP).txt
+	sh ./gerahelp.ksh $(HELP).txt
 
 $(HELP).txt: $(PARTS)
 	cat $(PARTS) | tr -d '\r' | awk 'NF>1' > $(HELP).txt

@@ -1,3 +1,6 @@
+#include <PalmOS.h>
+#include "68k/libraries/audio/PalmSoundMgrExt.h" // ?!
+
 #include "p.h"
 #include "main.h"
 #include "events.h"

@@ -172,7 +172,9 @@ BIN= $(LUA)/bin/palmos
 INC= $(LUA)/include
 LIB= $(LUA)/lib/palmos
 
-EXTRA_INCS= -I$(INC)/plua -I$(LUA)/src -I/opt/palmdev/sdk-5/include/PalmOne
+MULTILINK_LIBDIR=/usr/local/lib/m68k-palmos-multilink
+PALM_INCS=-I/opt/palmdev/PalmOne/Incs
+EXTRA_INCS= -I$(INC)/plua -I$(LUA)/src $(PALM_INCS)
 INCS= -I$(INC) $(EXTRA_INCS)
 DEFS= $(NUMBER) $(EXTRA_DEFS)
 
