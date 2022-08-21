@@ -24,6 +24,8 @@ These are admittedly difficult build requirements, as `prc-tools` is not 64-bit 
 
 By default, the build system expects the PalmOne SDK to be present at `/opt/palmdev/PalmOne` (such that `/opt/palmdev/PalmOne/Incs` exists) and the 68K COFF library fragments used by `multilink` in `/usr/local/lib/m68k-palmos-multilink`. In addition, the `prc-tools` binaries should be in your path. If this is not the case on your system, change `./config.palmos`. You can get a copy of the PalmOne SDK (and others) from [this Github archive](https://github.com/jichu4n/palm-os-sdk).
 
+If you have a Power Mac running Mac OS X Tiger 10.4, you can use [these instructions and binary packages](http://oldvcr.blogspot.com/2022/08/plua-2-continued-open-source-under-gpl.html), which include pre-built versions of all the tools mentioned above as well as the PalmOne SDK.
+
 With the system thus configured, type `make` to build the Palm OS binaries, which will be deposited in `bin/palmos`. These are PRCs which can be installed directly into POSE or your real Palm hardware. `make clean` will clear any intermediate artifacts and the final objects.
 
 Currently Plua is built on a Power Mac G5 Quad (and sometimes an iMac G4) running a Mac OS X Tiger (10.4) build of `prc-tools` and `multilink`, and an updated copy of `pilrc`. These systems run the compiler and linker in 32-bit mode, avoiding issues with 64-bit systems.
