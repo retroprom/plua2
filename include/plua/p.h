@@ -9,7 +9,6 @@
 #include <CtlGlue.h>
 #include <LstGlue.h>
 #include <SerialMgrOld.h>
-#include <Common/System/palmOneNavigator.h>
 
 #ifdef MULTILINK
 #define SEC(name)
