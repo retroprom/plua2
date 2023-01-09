@@ -25,4 +25,4 @@ clean:
 		-name '*.o' -o \
 		-name '*.tmp' -o \
 		-name '*.grc' -o \
-			-name '*.bin' \) -exec rm {} \;
+		-name '*.bin' \) -exec rm {} \;
