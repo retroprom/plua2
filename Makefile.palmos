@@ -12,6 +12,7 @@ all:
 	cd src/plua/rt; $(MAKE) $@
 	cd src/plua/help; $(MAKE) $@
 	cd src/plua/lib; $(MAKE) $@
+	cd src/plua/ext; $(MAKE) $@
 
 clean:
 	rm -rf $(DIRS) \
