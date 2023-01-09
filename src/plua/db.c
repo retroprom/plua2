@@ -85,7 +85,7 @@ char *DbOpenRec(DmOpenRef dbRef, UInt16 index, Err *err)
   char *rec;
 
   if (!dbRef) {
-    *err = -1; // XXX
+    *err = dmErrNoOpenDatabase;
     return NULL;
   }
 
@@ -114,7 +114,7 @@ Err DbCloseRec(DmOpenRef dbRef, UInt16 index, char *rec)
   Err err1, err2;
 
   if (!dbRef || !rec)
-    return -1; // XXX
+    return dmErrNoOpenDatabase;
 
   err1 = MemPtrUnlock(rec);
   err2 = DmReleaseRecord(dbRef, index, false);
@@ -131,7 +131,7 @@ Err DbCreateRec(DmOpenRef dbRef, UInt16 *index, UInt16 size, UInt16 category)
   *index = DbNumRecords(dbRef);
 
   if (!dbRef)
-    return -1; // XXX
+    return dmErrNoOpenDatabase;
 
   if (!(recH = DmNewRecord(dbRef, index, size)))
     return DmGetLastErr();
@@ -159,7 +159,7 @@ Err DbCreateRec(DmOpenRef dbRef, UInt16 *index, UInt16 size, UInt16 category)
 Err DbDeleteRec(DmOpenRef dbRef, UInt16 index)
 {
   if (!dbRef)
-    return -1; // XXX
+    return dmErrNoOpenDatabase;
 
   return DmDeleteRecord(dbRef, index);
 }
@@ -167,7 +167,7 @@ Err DbDeleteRec(DmOpenRef dbRef, UInt16 index)
 Err DbRemoveRec(DmOpenRef dbRef, UInt16 index)
 {
   if (!dbRef)
-    return -1; // XXX
+    return dmErrNoOpenDatabase;
 
   return DmRemoveRecord(dbRef, index);
 }
@@ -175,7 +175,7 @@ Err DbRemoveRec(DmOpenRef dbRef, UInt16 index)
 Err DbResizeRec(DmOpenRef dbRef, UInt16 index, UInt32 size)
 {
   if (!dbRef)
-    return -1; // XXX
+    return dmErrNoOpenDatabase;
 
   if (DmResizeRecord(dbRef, index, size) == NULL)
     return DmGetLastErr();
@@ -189,7 +189,7 @@ Err DbGetRecAttributes(DmOpenRef dbRef, UInt16 index, UInt16 *attr)
   LocalID id;
 
   if (!dbRef)
-    return -1; // XXX
+    return dmErrNoOpenDatabase;
 
   return DmRecordInfo(dbRef, index, attr, &uid, &id);
 }
@@ -202,7 +202,7 @@ Err DbSetRecAttributes(DmOpenRef dbRef, UInt16 index, UInt16 attr)
   LocalID id;
 
   if (!dbRef)
-    return -1; // XXX
+    return dmErrNoOpenDatabase;
 
   if ((err = DmRecordInfo(dbRef, index, &aux, &uid, &id)) != 0)
     return err;
@@ -216,7 +216,7 @@ Err DbGetRecID(DmOpenRef dbRef, UInt16 index, UInt32 *uid)
   UInt16 attr;
 
   if (!dbRef)
-    return -1; // XXX
+    return dmErrNoOpenDatabase;
 
   return DmRecordInfo(dbRef, index, &attr, uid, &id);
 }
