@@ -42,7 +42,7 @@ int compile(lua_State *L, char *in, char *out)
     fclose(f);
     callalert(L, status);
     return -1;
-  } 
+  }
   fclose(f);
 
   cl = (Closure *)lua_toclosure(L, -1);

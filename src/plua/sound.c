@@ -12,7 +12,7 @@
 
 typedef struct {
   UInt16 slot;
-  FILE *f;     
+  FILE *f;
   SndStreamRef streamRef;
   Boolean finished;
 } SoundCallbackData;
@@ -241,7 +241,7 @@ void SoundStop(UInt16 slot, Boolean close)
 {
   UInt32 value;
   SoundCallbackData *cb;
-  
+
   if (slot < SOUND_SLOTS &&
       FtrGet(sysFileCSoundMgr, sndFtrIDVersion, &value) == 0) {
     if (FtrGet(GetCreator(), SOUND_FEATURE+slot, (UInt32 *)&cb) == 0) {

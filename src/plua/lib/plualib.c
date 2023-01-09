@@ -27,7 +27,7 @@ Err PluaLibOpen(UInt16 refnum, lua_State *L)
 
   entry = SysLibTblEntry(refnum);
   p = (PluaLibData *)entry->globalsP;
-	
+
   if (p) {
     p->count++;
   } else {
@@ -39,7 +39,7 @@ Err PluaLibOpen(UInt16 refnum, lua_State *L)
 
     MemPtrSetOwner(p, 0);
   }
-	
+
   return 0;
 }
 
@@ -55,13 +55,13 @@ Err PluaLibClose(UInt16 refnum, lua_State *L, UInt16 *count)
     return dmErrMemError;
 
   *count = p->count--;
-	
+
   if (!(*count)) {
     PluaLibFinish(L);
     MemPtrFree(p);
     entry->globalsP = NULL;
   }
-	
+
   return 0;
 }
 
@@ -79,10 +79,10 @@ lua_CFunction PluaLibGet(UInt16 refnum, lua_State *L, char *s)
 {
   SysLibTblEntryType *entry;
   PluaLibData *p;
-	
+
   entry = SysLibTblEntry(refnum);
   p = (PluaLibData *)entry->globalsP;
-	
+
   if (!p)
     return NULL;
 

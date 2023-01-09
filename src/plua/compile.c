@@ -130,7 +130,7 @@ Boolean CompileFormHandleEvent(EventPtr event)
                linklib(creator, name, version, GetObjBuf()) == -1;
           }
 
-          FileDelete(0, GetObjBuf());   
+          FileDelete(0, GetObjBuf());
           prefs->readOnly = readOnly;
 
           // fall-through

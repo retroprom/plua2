@@ -95,7 +95,7 @@ Err AppInit(void *_p)
     value = 2;
   else
     value = 0;
-  
+
   if (value)
     WinScreenMode(winScreenModeSet, NULL, NULL, &value, NULL);
 

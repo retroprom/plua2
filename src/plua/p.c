@@ -586,8 +586,8 @@ FILE *fopen(const char *name, const char *mode0)
     if ((f = malloc(sizeof(FILE))) == NULL) {
       VFSFileClose(fref);
       return NULL;
-    } 
-  
+    }
+
     if (attr & vfsFileAttrDirectory) {
       f->type = FILE_VFSDIR;
       f->iterator = vfsIteratorStart;
@@ -827,7 +827,7 @@ FILE *fopen(const char *name, const char *mode0)
       errno = mapPalmOsErr(err);
       return NULL;
     }
-  
+
     if ((err = DbSetAttributes(dbRef,dmHdrAttrBackup|dmHdrAttrStream)) != 0) {
       FileClose(fh);
       errno = mapPalmOsErr(err);
@@ -1093,7 +1093,7 @@ FILE *netopen(const char *host, ushort port, ushort protocol, int dnsTimeout, in
 
   if ((f = malloc(sizeof(FILE))) == NULL)
     return NULL;
-    
+
   f->writable = true;
 
   switch (protocol) {
@@ -1123,7 +1123,7 @@ FILE *netopen(const char *host, ushort port, ushort protocol, int dnsTimeout, in
     }
     netAddr.addr = hostInfo.address[0];
   }
-  
+
   if ((f->sock = NetLibSocketOpen(netRef, netSocketAddrINET, type, 0, SysTicksPerSecond(), &err)) == -1) {
     free(f);
     errno = mapPalmOsErr(err);
@@ -1596,7 +1596,7 @@ size_t fwrite(void *buf, size_t size, size_t n, FILE *f)
     case FILE_DRIVER:
       r = 0;
       if ((driver = installedDrivers[f->driver]) == NULL)
-        errno = EINVAL; 
+        errno = EINVAL;
       else if (!driver->write)
         errno = ENODEV;
       else
@@ -1719,9 +1719,9 @@ int sprintf(char * buf, const char *fmt, ...)
 {
   va_list argp;
   int n;
-                 
+
   va_start(argp, fmt);
-  n = vsprintf(buf, fmt, argp);  
+  n = vsprintf(buf, fmt, argp);
   va_end(argp);
   return n;
 }
@@ -2217,7 +2217,7 @@ static struct tm *gettime(const time_t *t, Int32 d)
   localTime.tm_mon = dateTime.month-1;
   localTime.tm_year = dateTime.year - 1900;
   localTime.tm_wday = dateTime.weekDay;
-  
+
   errno = 0;
   return &localTime;
 }
@@ -2246,7 +2246,7 @@ struct tm *gmtime(const time_t *t)
 }
 
 struct tm *localtime(const time_t *t)
-{ 
+{
   return gettime(t, 0);
 }
 
@@ -2471,7 +2471,7 @@ void CreatorToString(UInt32 creator, char *s)
   s[1] = (char)(creator >> 16);
   s[2] = (char)(creator >> 8);
   s[3] = (char)creator;
-  s[4] = '\0';   
+  s[4] = '\0';
 }
 
 UInt32 StringToCreator(char *s)
