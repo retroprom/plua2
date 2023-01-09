@@ -1,21 +1,10 @@
 LUA       = ../..
 include $(LUA)/config.palmos
 
-MULTILINK = $(MULTILINK_LIBDIR)
-
-INC       = -I$(LUA)/include -I$(LUA)/include/plua -I. -I.. $(PALM_INCS)
-
-DEFS      = -DMULTILINK -DPALMOS -DLUA5
-
-CFLAGS    = -O2 -Wall -Wno-switch $(INC) $(DEFS) -palmos5
-LDFLAGS   = -L.
-
-LIBS      = $(LIB)/liblua.a $(LIB)/liblualib.a
-
-PILRC     = pilrc
-BUILDPRC  = build-prc
-
 PROG      = plua2
+
+LIBS      = $(LIB)/liblua.a $(LIB)/liblualib.a libnfm.a libnfm2.a $(PALM_LIBDIR)/libPalmOSGlue.a
+LDFLAGS   = -L.
 
 OBJS      = main.o app.o p.o text.o error.o db.o doc.o rsrc.o \
 	    memolist.o doclist.o streamlist.o vfslist.o file.o list.o \
@@ -35,7 +24,7 @@ resource.tmp: Makefile resource.rcp
 	sed -e "s/@@VERSION@@/$(VERSION)/g" < resource.rcp > resource.tmp
 
 $(BIN)/$(PROG).prc: $(OBJS) $(LOBJS) $(LIBS) res
-	m68k-palmos-multilink -basename PLUA -segmentsize 29k -nostdlib -libdir $(MULTILINK) -fid LuaP $(OBJS) $(LOBJS) $(LIBS) libnfm.a libnfm2.a /opt/palmdev/sdk-5/lib/m68k-palmos-coff/libPalmOSGlue.a
+	m68k-palmos-multilink -basename PLUA -segmentsize 29k -nostdlib -fid LuaP $(OBJS) $(LOBJS) $(LIBS)
 	rm -f pref0000.PLUA.grc
 	cp pref0000.dat pref0000.PLUA.grc
 	$(BUILDPRC) $(BIN)/$(PROG).prc Plua2 LuaP *.PLUA.grc *.bin

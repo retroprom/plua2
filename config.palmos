@@ -15,6 +15,20 @@ USERCONF=
 
 # == CHANGE THE SETTINGS BELOW TO SUIT YOUR ENVIRONMENT =======================
 
+# -------------------------------------------------------------------- Palm SDK
+
+# Version of SDK to use
+PALM_SDK   =palmos-sdk-5.0r3
+
+# Retrieve information about the SDK
+PALM_CFLAGS=$(shell pkg-config --cflags $(PALM_SDK))
+PALM_LIBDIR=$(shell pkg-config --variable libdir $(PALM_SDK))
+
+# ------------------------------------------------------------------ Palm Tools
+
+PILRC     = pilrc
+BUILDPRC  = build-prc
+
 # --------------------------------------------------------------- Lua libraries
 
 # Support for dynamically loading C libraries for Lua is a very important
@@ -111,7 +125,7 @@ EXTRA_LIBS= -lnfm -lPalmOSGlue
 # WARN because it disables POSIX features used in the libraries.
 #
 CC= m68k-palmos-gcc
-WARN= -Wall
+WARN= -Wall -Wno-switch
 
 # ------------------------------------------------------------------ C options
 
@@ -121,8 +135,7 @@ WARN= -Wall
 # debug information. If you only want the shared libraries, you may want to
 # add -fPIC to MYCFLAGS.
 #
-MYCFLAGS= -O2 -Wall -Wno-switch -palmos5 -DMULTILINK -DPALMOS -DLUA5
-#MYCFLAGS= -O3 -fomit-frame-pointer # -fPIC
+MYCFLAGS= -O2
 
 # Write here any options you may need for your C linker.
 #MYLDFLAGS=
@@ -172,12 +185,9 @@ BIN= $(LUA)/bin/palmos
 INC= $(LUA)/include
 LIB= $(LUA)/lib/palmos
 
-MULTILINK_LIBDIR=/usr/local/lib/m68k-palmos-multilink
-PALM_INCS=-I/opt/palmdev/PalmOne/Incs
-EXTRA_INCS= -I$(INC)/plua -I$(LUA)/src $(PALM_INCS)
-INCS= -I$(INC) $(EXTRA_INCS)
-DEFS= $(NUMBER) $(EXTRA_DEFS)
+INCS= -I$(INC) -I$(INC)/plua -I$(LUA)/src -I$(LUA)/src/plua
+DEFS= -DLUA5 -DPALMOS -DMULTILINK $(NUMBER)
 
-CFLAGS= $(MYCFLAGS) $(WARN) $(INCS) $(DEFS)
+CFLAGS= $(MYCFLAGS) $(WARN) $(DEFS) $(EXTRA_DEFS) $(INCS) $(EXTRA_INCS) $(PALM_CFLAGS)
 
 # (end of config)
