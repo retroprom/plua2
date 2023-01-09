@@ -48,7 +48,7 @@ Err DbGetTypeCreator(char *name, UInt32 *type, UInt32 *creator)
   if ((dbID = DmFindDatabase(0, name)) == 0)
     return dmErrCantFind;
 
-  return DmDatabaseInfo(0, dbID, 
+  return DmDatabaseInfo(0, dbID,
             NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
             type, creator);
 }
