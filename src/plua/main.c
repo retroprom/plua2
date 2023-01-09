@@ -162,6 +162,7 @@ static Boolean InterceptEvent(EventPtr event, Boolean *pass, Boolean app)
               event->data.keyDown.chr = vchrPageDown;
             }
             break;
+#if 0
           case vchrNavChange:
             if (app) {
               if (NavSelectPressed(event)) {
@@ -173,9 +174,12 @@ static Boolean InterceptEvent(EventPtr event, Boolean *pass, Boolean app)
               } else if (NavDirectionPressed(event, Right)) {
                 event->eType = fakeKeyDownEvent;
                 event->data.keyDown.chr = vchrRockerRight;
-              } else
+              } else {
                 intercepted = true;
+              }
             }
+            break;
+#endif
         }
       break;
     case sampleStopEvent:
