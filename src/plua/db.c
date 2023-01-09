@@ -221,6 +221,22 @@ Err DbGetRecID(DmOpenRef dbRef, UInt16 index, UInt32 *uid)
   return DmRecordInfo(dbRef, index, &attr, uid, &id);
 }
 
+Err DbSetRecID(DmOpenRef dbRef, UInt16 index, UInt32 uid)
+{
+  Err err;
+  UInt32 attr;
+  UInt32 aux;
+  LocalID id;
+
+  if (!dbRef)
+    return dmErrNoOpenDatabase;
+
+  if ((err = DmRecordInfo(dbRef, index, &attr, &aux, &id)) != 0)
+    return err;
+
+  return DmSetRecordInfo(dbRef, index, &attr, &uid);
+}
+
 UInt16 DbNumRecords(DmOpenRef dbRef)
 {
   return DmNumRecords(dbRef);

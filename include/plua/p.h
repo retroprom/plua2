@@ -193,6 +193,7 @@ int dbcloserec(FILE *) SEC("aux");
 int dbgetreccat(FILE *, UInt16) SEC("aux");
 int dbsetreccat(FILE *, UInt16, UInt16) SEC("aux");
 long dbgetrecid(FILE *, UInt16) SEC("aux");
+int dbsetrecid(FILE *, UInt16, long) SEC("aux");
 long dbopeninfo(FILE *f) SEC("aux");
 
 size_t dbread(void *, size_t, size_t, FILE *) SEC("aux");

@@ -614,6 +614,18 @@ static int io_getrecid (lua_State *L) {
   return pushresult(L, 0, NULL);
 }
 
+static int io_setrecid (lua_State *L) {
+  FILE *f = tofile(L, 1);
+  Int32 index = luaL_check_int(L, 2);
+  Int32 uid = luaL_check_int(L, 3);
+  int r = dbsetrecid(f, index, uid);
+  if (r != -1) {
+    lua_pushnumber(L, uid);
+    return 1;
+  }
+  return pushresult(L, 0, NULL);
+}
+
 static int io_listdir (lua_State *L) {
   FileType file;
   char *path, *suffix, *s;
@@ -769,6 +781,7 @@ static const luaL_reg flib[] = {
   {"getreccat", io_getreccat},
   {"setreccat", io_setreccat},
   {"getrecid", io_getrecid},
+  {"setrecid", io_setrecid},
 
   {"readdir", io_readdir},
 #endif

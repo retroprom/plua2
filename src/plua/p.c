@@ -1931,6 +1931,30 @@ long dbgetrecid(FILE *f, UInt16 index)
   return id;
 }
 
+int dbsetrecid(FILE *f, UInt16 index, long id)
+{
+  if (!f || (f->type != FILE_PDB && f->type != FILE_MEMO)) {
+    errno = EBADF;
+    return -1;
+  }
+
+  if (index >= f->nRecords) {
+    errno = EINVAL;
+    return -1;
+  }
+
+  if (!f->writable) {
+    errno = EACCES;
+    return -1;
+  }
+
+  errno = mapPalmOsErr(DbSetRecID(f->dbRef, index, id));
+  if (errno != 0)
+    return -1;
+
+  return 0;
+}
+
 long dbopenrec(FILE *f, UInt16 index)
 {
   Err err;

@@ -16,6 +16,7 @@ Err DbResizeRec(DmOpenRef dbRef, UInt16 index, UInt32 size) SEC("aux");
 Err DbGetRecAttributes(DmOpenRef dbRef, UInt16 index, UInt16 *attr) SEC("aux");
 Err DbSetRecAttributes(DmOpenRef dbRef, UInt16 index, UInt16 attr) SEC("aux");
 Err DbGetRecID(DmOpenRef dbRef, UInt16 index, UInt32 *uid) SEC("aux");
+Err DbSetRecID(DmOpenRef dbRef, UInt16 index, UInt32 uid) SEC("aux");
 UInt16 DbNumRecords(DmOpenRef dbRef) SEC("aux");
 
 char *DbOpenAppInfo(DmOpenRef dbRef) SEC("aux");
